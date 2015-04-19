@@ -1,0 +1,14 @@
+﻿<header style="text-align:left">
+    <h2>Register</h2>
+</header>
+<br />
+
+<div class="form-inline">
+    <form>
+        <input ng-model="user.username" class="form-control" autofocus required /> Username <br /><br />
+        <input ng-model="user.password" class="form-control" type="password" required /> Password <br /><br />
+        <input ng-model="user.password2" class="form-control" type="password" required /> Confirm Password <br /><br />
+        <button class="btn btn-success" ng-click="register(user)">Register</button><br />
+    </form>
+</div>
+

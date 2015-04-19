@@ -1,0 +1,82 @@
+﻿<div ng-init="initial()">
+    
+    <div class="page-header" >
+        
+        <div style="border: double">
+            <div class="list-group-item" style="background-color: #C2C2A3;">
+                <span class=" glyphicon glyphicon-upload"
+                      ng-click="incrementUpvotes(post)">
+                </span>
+                <span class="glyphicon glyphicon-download"
+                      ng-click="decrementUpvotes(post)"></span>
+                <span class="badge">
+                    {{post.upvotes}}
+                </span>
+                <span style="font-size:170%">{{post.title}}</span>
+                <div class="list-group-item">
+                    {{post.content}}
+                </div>
+            </div>
+            <div class="list-group-item" style="background-color: #E5E5FF; ">
+
+                <span style="font-size:85%">
+                    Posted by
+                    <a href="#/rest/user/{{post.author._id}}" ng-click="getUserById(author._id)">
+                        {{post.author.username}}
+                    </a>
+                    <span class="glyphicon glyphicon-user" style="padding-right:10px; color:black"></span>
+                </span>
+
+                <span style="font-size:85%;">
+
+                    <a href="#/rest/postinfo/tag/{{post.tag._id}} " ng-click="getTagById(post.tag._id)" style="padding-left:10px">
+                        {{post.tag.tag}}
+                        <span class="glyphicon glyphicon-tag" style="padding-right:10px; color:black"></span>
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        </div>
+
+        
+    <div>
+
+        
+        <h2>Comments</h2>
+    
+  
+        <div ng-repeat="comment in post.comments | orderBy:'-upvotes'" class="list-group-item">
+
+            <span class="glyphicon glyphicon-upload"
+                  ng-click="incrementCommentUpvotes(comment)"></span>
+            <span class="glyphicon glyphicon-download"
+                  ng-click="decrementCommentUpvotes(comment)"></span>
+
+            <span id="commentbody" margin-left:10px;">
+                {{comment.commentbody}}
+            </span>
+            <span class="badge pull-right">
+                {{comment.upvotes}}
+            </span>
+            <div style="font-size: 85%; background-color: #E5E5FF; " class="list-group-item">
+                Posted by
+                <a href="#/rest/user/{{comment.author._id}}" ng-click="getUserById(comment.author._id)"> {{comment.author.username}}</a>
+                <span class="glyphicon glyphicon-user" style="padding-right:10px; color:black"></span>
+            </div>
+
+        </div>
+    </div>
+    
+    <form ng-show="currentUser">
+        <h3>Add a new comment</h3>
+        <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Comment"
+                   ng-model="comment.commentbody"/>
+        </div>
+        <button class=" btn btn-primary" ng-click="addComment(comment)">Add Comment</button>
+    </form>
+
+</div>

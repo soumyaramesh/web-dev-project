@@ -1,0 +1,56 @@
+﻿
+<h1 style="text-align:center">Profile</h1>
+<div ng-init="intial()">
+    <h2 style="text-align:center">Hi {{user.username}}!</h2><br/>
+    <h3>My Posts:</h3> <br/>
+    <div ng-repeat="post in userposts" class="list-group-item">
+      
+            
+                <span class="glyphicon glyphicon-upload"
+                      ng-click="incrementUpvotes(post)"></span>
+                <span class="glyphicon glyphicon-download"
+                      ng-click="decrementUpvotes(post)"></span>
+                <span class="badge">{{post.upvotes}}</span>
+
+                <span style="font-size:120%; margin-left:10px;">
+                    <a ng-show="!isUrl(post.content)" href="#/rest/postinfo/{{post._id}}">
+                        {{post.title}}
+                    </a>
+
+                    <a ng-show="isUrl(post.content)" href="{{post.content}}">
+                        {{post.title}}
+                    </a>
+                </span>
+            
+        <div class="list-group-item" style="background-color: #DEDEE8; ">
+
+            <span style="font-size:12px;">
+                tag:
+                <a href="#/rest/postinfo/tag/{{post.tag._id}} " ng-click="getTagById(post.tag._id)">
+                    {{post.tag.tag}}
+                </a>
+                <span class="glyphicon glyphicon-tag" style="padding-right:10px; color:black"></span>
+            </span>
+            <span style="font-size:12px;">
+                <a href="#/rest/postinfo/{{post._id}} ">
+                    Comments
+                </a>
+                <span class="glyphicon glyphicon-comment" style="padding-right:10px; color:black"></span>
+            </span>
+        </div>
+        </div>
+
+        <div ng-show="hasfollowing">
+            <h3>Following:</h3>
+            <div ng-repeat="follower in populatedUser.following" class="list-group-item" style="background-color: #D1D1BA">
+                <span class="glyphicon glyphicon-user" style="padding-right:10px; color:black"></span>
+                <a href="#/rest/user/{{follower._id}}" ng-click="getUserById(follower._id)">
+                    {{follower.username}}
+                    
+                </a>
+            </div>
+        </div>
+
+    
+</div>
+

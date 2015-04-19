@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/angular.js"></script>
+    <script src="/js/angular-route.js"></script>
+
+
+    <script src="/js/angularApp.js"></script>
+    <script src="/views/nav/navApp.js"></script>
+    <script src="/views/register/registerApp.js"></script>
+    <script src="/views/login/loginApp.js"></script>
+    <script src="/views/profile/profileApp.js"></script>
+
+
+    <script src="/views/new_post/newpostApp.js"></script>
+    <script src="/views/login/UserService.js"></script>
+    <script src="/views/userinfo/UserApp.js"></script>
+    <script src="/views/postinfo/postinfoApp.js"></script>
+    <script src="/views/taginfo/taginfoApp.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Arizonia" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Bad+Script|Lobster' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Noto+Serif|Libre+Baskerville:400,400italic|Old+Standard+TT' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT:400italic|Crimson+Text:600italic' rel='stylesheet' type='text/css'>
+
+
+    <style>
+        body {
+            padding-top: 10px;
+            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
+
+        
+        #navitem {
+            font-family:'Lobster',cursive;
+        }
+
+        #postit {
+            font-family: Arizonia;
+            font-size: 200%;
+        }
+
+        
+            #homepage-navbar-collapse li a:link {
+                color: white;
+            }
+
+
+        #homepage-navbar-collapse li a:hover{
+            color: red;
+        }
+
+        #posttitle {
+            font-family: 'Libre Baskerville', cursive;
+            font-size:120%;
+        }
+
+        #commentbody {
+            font-family: 'Crimson Text', cursive;
+            font-size:110%;
+        }
+
+        .list-group-item {
+            word-wrap: break-word;
+            overflow: hidden;
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: -1px;
+            border: 1px solid #ddd;
+        }
+            
+    </style>
+
+</head>
+
+
+<body ng-app="MainApp" ng-controller="MainCtrl">
+
+
+    <div class="container">
+        <nav ng-controller="NavCtrl" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#homepage-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a style="color:white" id="navitem" class="navbar-brand" href="#home">Home</a>
+                </div>
+
+
+                <div class="collapse navbar-collapse" id="homepage-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ng-show="!currentUser"><a href="#login" data-toggle="collapse" data-target="#homepage-navbar-collapse">Login</a></li>
+                        <li ng-show="!currentUser"><a href="#register" data-toggle="collapse" data-target="#homepage-navbar-collapse">Register </a></li>
+                        <li ng-show="currentUser"><a href="#profile" data-toggle="collapse" data-target="#homepage-navbar-collapse">Profile</a></li>
+                    </ul>
+                    <form ng-show="currentUser" class="navbar-btn pull-right">
+                        <a href="#profile" style="color:white">Hi {{currentUser.username}}! </a>
+                        <button type="button" ng-click="logout()" class="btn btn-danger" data-toggle="collapse" data-target="#homepage-navbar-collapse">Logout</button> <br />
+                            
+                    </form>
+
+                    <form ng-show="currentUser" class="navbar-btn pull-left">
+                        <a href="#newpost"></a>
+                        <a class="btn btn-primary" href="#newpost" data-toggle="collapse" data-target="#homepage-navbar-collapse">New Post</a> <br />
+                    </form>
+
+                </div>
+
+
+            </div>
+        </nav>
+
+
+        <div class="page-header" id="postit" style="background-color: #D1D1BA">
+            <h1 style="padding-top:30px;text-align:center;font-size:200%;">PostIt!</h1>
+
+        </div>
+        <div ng-hide="currentUser" class="pull-right container-fluid">
+            <h5>You need to <a href="/#/login">Login</a> or <a href="/#/register">Register</a> to add a post or comment.</h5>
+        </div>
+
+        <br />
+        <br />
+        <div ng-view>
+        </div>
+    </div>
+</body>
+</html>

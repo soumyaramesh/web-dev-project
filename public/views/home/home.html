@@ -1,0 +1,59 @@
+﻿<div ng-init="getAllPosts(); getAllTags();">
+    <input class="form-control" id="searchbox" placeholder="Search" ng-model="searchbox" /> <br />
+    <h3>Posts</h3>
+
+
+    <div ng-repeat="post in posts | orderBy:'-upvotes' |filter:searchbox" class="list-group-item">
+
+        <span class=" glyphicon glyphicon-upload"
+              ng-click="incrementUpvotes(post)">
+        </span>
+        <span class="glyphicon glyphicon-download"
+              ng-click="decrementUpvotes(post)"></span>
+        <span class="badge">
+            {{post.upvotes}}
+        </span>
+
+
+        <span id="posttitle" margin-left:10px;">
+            <a ng-show="!isUrl(post.content)" href="#/rest/postinfo/{{post._id}}">
+                {{post.title}}
+            </a>
+
+            <a ng-show="isUrl(post.content)" href="{{post.content}}" target="_blank">
+                <span class=" glyphicon glyphicon-link" style="color:black"></span>
+                {{post.title}}
+            </a>
+        </span>
+
+
+        <div class="list-group-item" style="background-color: #E0EBFF">
+            <span style="font-size:85%;">
+                <strong>Posted by </strong>
+                <a href="#/rest/user/{{post.author._id}}" ng-click="getUserById(author._id)">
+                    {{post.author.username}}
+                    <span class="glyphicon glyphicon-user" style="padding-right:10px; color:black"></span>
+                </a>
+            </span>
+
+            <span style="font-size:85%;">
+
+                <a href="#/rest/postinfo/tag/{{post.tag._id}} " ng-click="getTagById(post.tag._id)" style="padding-left:10px">
+                    {{post.tag.tag}}
+                    <span class="glyphicon glyphicon-tag" style="padding-right:10px; color:black"></span>
+                </a>
+            </span>
+
+            <span style="font-size:85%;">
+                <a href="#/rest/postinfo/{{post._id}} ">
+                    Comments
+                    <span class="glyphicon glyphicon-comment" style="padding-right:10px; color:black"></span>
+                </a>
+            </span>
+
+
+        </div>
+    </div>
+    <br />
+</div>
+

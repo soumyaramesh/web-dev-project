@@ -1,0 +1,17 @@
+﻿
+
+    <header style="text-align:center">
+        <h3>Add a new Post</h3>
+    </header>
+    <div class="container">
+        
+        <form class="newpost">
+            <input ng-model="newpost.title" id="title" class="form-control" placeholder="Enter the title" autofocus required /><br /><br />
+            <textarea ng-model="newpost.content" id="postcontent" class="form-control" placeholder="Enter your content" required></textarea><br /><br />
+            <input type="text" id="tagname" ng-model="newpost.tagname" list="tagdatalist" placeholder="Enter a tag" required/> <br/><br/>
+            <datalist id="tagdatalist">
+                <option data-ng-repeat="tag in tagList" value="{{tag.tag}}">
+            </datalist>
+            <button ng-click="submitPost(newpost)" class="btn btn-success btn-block" type="submit" value="Post!">Post!</button><br/>
+        </form>
+    </div>
